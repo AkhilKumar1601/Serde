@@ -24,21 +24,23 @@ pub fn serialize_deserialize_yaml () {
       age : 21
     }
   };
+
+  let mut yaml_str = String :: new ();
   
   match serde_yaml :: to_string (&s) {
-    Ok (yaml_str) => {
-      println!("Serialized Data : {}", yaml_str);
-
-      match serde_yaml :: from_str :: <MyStruct> (&yaml_str) {
-        Ok (deserialized_struct) => {
-          println!("Deserialized Data : {:?}", deserialized_struct);
-        } Err (e) => {
-          eprintln!("Failed to Deserialize: {}", e);
-        }
-      }
-
+    Ok (yaml_str1) => {
+      println!("Serialized Data : {}", yaml_str1);
+      yaml_str = yaml_str1;
     } Err (e) => {
       eprintln!("Failed to Serialize : {}",e)
+    }
+  }
+
+  match serde_yaml :: from_str :: <MyStruct> (&yaml_str) {
+    Ok (deserialized_struct) => {
+      println!("Deserialized Data : {:?}", deserialized_struct);
+    } Err (e) => {
+      eprintln!("Failed to Deserialize: {}", e);
     }
   }
 }
